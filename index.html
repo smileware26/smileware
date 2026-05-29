@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmileWare Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                #0a74c0,
+                #7bc6ff
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 430px;
+            padding: 40px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius: 25px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-wrap {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-wrap img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a74c0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+
+            border: 1px solid #ccc;
+            border-radius: 12px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0a74c0;
+            box-shadow: 0 0 8px rgba(10, 116, 192, 0.3);
+        }
+
+        .error {
+            display: none;
+
+            margin-top: 8px;
+
+            color: #c0392b;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #0a74c0;
+
+            color: #fff;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .admin-btn {
+            background: #c0392b;
+        }
+
+        .register-btn {
+            background: #27ae60;
+        }
+
+        @media (max-width: 500px) {
+            .login-box {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+
+        <div class="logo-wrap">
+            <img
+                src="logo.png"
+                alt="SmileWare Logo"
+            >
+        </div>
+
+        <h1>SmileWare Login</h1>
+
+        <p>
+            Secure Dental Appointment Management
+        </p>
+
+        <label for="email">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter Email"
+        >
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+        >
+
+        <div id="errorMsg" class="error"></div>
+
+        <div class="btn-group">
+
+            <button onclick="loginUser()">
+                User Login
+            </button>
+
+            <button
+                class="admin-btn"
+                onclick="loginAdmin()"
+            >
+                Admin Login
+            </button>
+
+            <button
+                class="register-btn"
+                onclick="registerUser()"
+            >
+                Register
+            </button>
+
+        </div>
+    </div>
+
+    <script src="loginjs.js"></script>
+</body>
+</html>
