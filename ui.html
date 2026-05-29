@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmileWare Developers</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #eef6ff;
+            color: #222;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 15px 30px;
+
+            background: #fff;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #0a74c0;
+        }
+
+        .logo-title img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0a74c0;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #085d99;
+        }
+
+        .logout-btn {
+            width: auto;
+            padding: 12px 18px;
+
+            background: #0a74c0;
+
+            color: #fff;
+            font-weight: bold;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #085d99;
+        }
+
+        .hero,
+        .services,
+        .booking-section {
+            min-height: 100vh;
+
+            padding: 40px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #0a74c0,
+                #5db2ff
+            );
+
+            color: #fff;
+            text-align: center;
+
+            border-radius: 0 0 30px 30px;
+        }
+
+        .hero-logo {
+            display: flex;
+            justify-content: center;
+
+            margin-bottom: 15px;
+        }
+
+        .hero-logo img {
+            width: 120px;
+            height: 120px;
+
+            padding: 8px;
+
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+
+            text-align: center;
+            color: #0a74c0;
+        }
+
+        .service-grid {
+            display: grid;
+
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+
+            gap: 20px;
+        }
+
+        .card,
+        .calendar,
+        .history-scroll,
+        .table-box {
+            padding: 20px;
+
+            background: #fff;
+
+            border-radius: 14px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 170px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            color: #0a74c0;
+        }
+
+        label {
+            display: block;
+
+            margin-top: 15px;
+            margin-bottom: 6px;
+
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #0a74c0;
+        }
+
+        .book-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+
+            background: #0a74c0;
+
+            color: #fff;
+            font-weight: bold;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #085d99;
+        }
+
+        .time-slots {
+            display: grid;
+
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(120px, 1fr)
+            );
+
+            gap: 10px;
+
+            margin: 20px 0;
+        }
+
+        .slot {
+            padding: 12px;
+
+            background: #0a74c0;
+
+            color: #fff;
+            font-weight: bold;
+
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .slot:hover {
+            background: #085d99;
+        }
+
+        .selected-slot {
+            background: #053d66;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+
+            text-align: left;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #0a74c0;
+            color: #fff;
+        }
+
+        .history-scroll {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .calendar {
+            overflow: visible;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+
+            background: #0a74c0;
+
+            color: #fff;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .services,
+            .booking-section,
+            .hero {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h2 class="logo-title">
+            <img
+                src="logo.png"
+                alt="SmileWare Logo"
+            >
+
+            SmileWare Developers
+        </h2>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#booking">Book Appointment</a>
+            <a href="#history">Booking History</a>
+        </nav>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </header>
+
+    <section class="hero" id="home">
+
+        <div class="hero-logo">
+            <img
+                src="logo.png"
+                alt="SmileWare Logo"
+            >
+        </div>
+
+        <h1>SmileWare Developers</h1>
+
+        <p>
+            When Dentistry Meets Digital Solutions
+        </p>
+
+    </section>
+
+    <section class="services" id="services">
+
+        <h2 class="section-title">
+            Dental Services
+        </h2>
+
+        <div class="service-grid">
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"
+                    alt="Teeth Cleaning"
+                >
+
+                <h3>Teeth Cleaning</h3>
+
+                <p>
+                    Professional cleaning and hygiene
+                    maintenance.
+                </p>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe"
+                    alt="Braces"
+                >
+
+                <h3>Braces</h3>
+
+                <p>
+                    Orthodontic treatment for alignment.
+                </p>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09"
+                    alt="Tooth Extraction"
+                >
+
+                <h3>Tooth Extraction</h3>
+
+                <p>
+                    Safe tooth removal procedure.
+                </p>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1581595219315-a187dd40c322"
+                    alt="X-Ray"
+                >
+
+                <h3>X-Ray</h3>
+
+                <p>
+                    Digital dental imaging services.
+                </p>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95"
+                    alt="Dental Filling"
+                >
+
+                <h3>Dental Filling</h3>
+
+                <p>
+                    Restore damaged teeth with quality
+                    fillings.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="booking-section" id="booking">
+
+        <h2 class="section-title">
+            Book Appointment
+        </h2>
+
+        <div class="calendar">
+
+            <label for="patientName">
+                Patient Name
+            </label>
+
+            <input
+                type="text"
+                id="patientName"
+                placeholder="Enter patient name"
+            >
+
+            <label for="serviceType">
+                Select Service
+            </label>
+
+            <select id="serviceType">
+
+                <option>
+                    Teeth Cleaning
+                </option>
+
+                <option>
+                    Braces Consultation
+                </option>
+
+                <option>
+                    Tooth Extraction
+                </option>
+
+                <option>
+                    X-Ray
+                </option>
+
+                <option>
+                    Dental Filling
+                </option>
+
+            </select>
+
+            <label for="appointmentDate">
+                Appointment Date
+            </label>
+
+            <input
+                type="date"
+                id="appointmentDate"
+            >
+
+            <label>
+                Available Schedule
+                (9:00 AM - 4:00 PM)
+            </label>
+
+            <div class="time-slots">
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    9:00 AM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    10:00 AM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    11:00 AM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    12:00 PM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    1:00 PM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    2:00 PM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    3:00 PM
+                </button>
+
+                <button
+                    type="button"
+                    class="slot"
+                >
+                    4:00 PM
+                </button>
+
+            </div>
+
+            <div class="table-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Patient</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="previewTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+            <button
+                class="book-btn"
+                onclick="bookAppointment()"
+            >
+                Confirm Booking
+            </button>
+
+        </div>
+
+    </section>
+
+    <section
+        class="booking-section"
+        id="history"
+    >
+
+        <h2 class="section-title">
+            Booking History
+        </h2>
+
+        <div class="table-box history-scroll">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Patient</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <footer>
+        SmileWare Developers © 2026
+    </footer>
+
+    <script src="functions.js"></script>
+
+</body>
+</html>
